@@ -10,7 +10,7 @@ node{
    
    stage('email-notificaiton'){
       
-      mail bcc: '', body: '', cc: '', from: '', replyTo: '', subject: 'jenskins build status ', to: 'k.r.rao@outlook.com'
+      emailext attachLog: true, body: 'jenkins-build', mimeType: 'text', recipientProviders: [buildUser()], replyTo: 'suryateja.donugu@gmail.com', subject: 'jenkins build status ', to: 'suryateja.donugu@gmail.com'
       
       
       
