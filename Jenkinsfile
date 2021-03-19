@@ -4,8 +4,9 @@ node{
       
    }
    stage('Build'){
-      def mvnHome = tool name: 'm2', type: 'maven'
-      sh  "${mvnHome}/bin/mvn clean package"s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'mybucket1forjenkins', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'ap-south-1', showDirectlyInBrowser: false, sourceFile: '**/*', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'jenkins-s3 ', userMetadata: []
+      sh 'mvn clean package'
+      #def mvnHome = tool name: 'm2', type: 'maven'
+      #sh  "${mvnHome}/bin/mvn clean package"s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: 'mybucket1forjenkins', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: true, selectedRegion: 'ap-south-1', showDirectlyInBrowser: false, sourceFile: '**/*', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'jenkins-s3 ', userMetadata: []
    }
    
    stage('upload artifacts to s3'){
@@ -16,8 +17,6 @@ node{
    stage('email-notificaiton'){
       
       emailext attachLog: true, body: 'jenkins-build', mimeType: 'text', recipientProviders: [buildUser()], replyTo: 'suryateja.donugu@gmail.com', subject: 'jenkins build status ', to: 'suryateja.donugu@gmail.com'
-      
-      
       
    }
    
