@@ -2,6 +2,7 @@ node{
    stage('SCM Checkout'){
       git credentialsId: 'git-cred', url: 'https://github.com/surya9032/my-app.git'
       
+      
    }
    stage('Build'){
       sh 'mvn clean package'
