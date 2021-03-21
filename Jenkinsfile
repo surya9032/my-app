@@ -9,7 +9,7 @@ node{
      
    }
    stage('tomcat'){
-      sshagent(['tomcat2']) {
+      sshagent(['tom1']) {
         sh 'scp -o strictHostkeyChecking=no target/*.war root@172-31-44-241:/opt/tomcat-8.5.64/webapps/'
 
       }
