@@ -8,6 +8,12 @@ node{
       sh 'mvn clean package'
      
    }
+   stage('tomcat'){
+      sshagent(['tomcat2']) {
+      sh 'scp -o stricthostkeychecking=no target/*.war root@ip-172-31-44-241:/opt/tomcat-8.5.64/webapps/'
+
+      }
+   }
    stage('upload artifacts to s3'){
       s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: '', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'ap-south-1', showDirectlyInBrowser: false, sourceFile: '**/jenkinsfile/*.war', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'mybucket1forjenkins', userMetadata: []
    
