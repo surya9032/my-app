@@ -10,7 +10,7 @@ node{
    }
    stage('tomcat'){
       sshagent(['hello']) {
-        sh 'scp -o StrictHostkeyChecking=no target/*.war ec2-user@172-31-44-241:/opt/tomcat-8.5.64/webapps/'
+        sh 'scp -i StrictHostkeyChecking=no target/*.war ec2-user@172-31-44-241:/opt/tomcat-8.5.64/webapps/'
 
       }
    }
