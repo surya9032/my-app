@@ -9,10 +9,7 @@ node{
      
    }
    stage('tomcat'){
-      sshagent(['hello']) {
-      sh "scp -o StrictHostkeyChecking=no **/target/*.war ec2-user@172-31-44-241:/opt/tomcat-8.5.64/webapps/"
-
-      }
+      deploy adapters: [tomcat8(credentialsId: '8aa7ac5e-1b7e-4d89-ac74-0efc063e6c53', path: '', url: 'http://localhost:8080/')], contextPath: 'my-app', war: '**/*.war*'
    }
    stage('upload artifacts to s3'){
       s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: '', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'ap-south-1', showDirectlyInBrowser: false, sourceFile: '**/jenkinsfile/*.war', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'mybucket1forjenkins', userMetadata: []
