@@ -9,7 +9,7 @@ node{
      
    }
    stage('tomcat'){
-      deploy adapters: [tomcat8(credentialsId: '8aa7ac5e-1b7e-4d89-ac74-0efc063e6c53', path: '', url: 'http://13.127.54.167:8080')], contextPath: null, onFailure: false, war: '**/*.war*'
+      deploy adapters: [tomcat8(credentialsId: 'tomcat10', path: '', url: 'http://13.127.54.167:8080')], contextPath: null, onFailure: false, war: '**/*.war*'
    }
    stage('upload artifacts to s3'){
       s3Upload consoleLogLevel: 'INFO', dontSetBuildResultOnFailure: false, dontWaitForConcurrentBuildCompletion: false, entries: [[bucket: '', excludedFile: '', flatten: false, gzipFiles: false, keepForever: false, managedArtifacts: false, noUploadOnFailure: false, selectedRegion: 'ap-south-1', showDirectlyInBrowser: false, sourceFile: '**/jenkinsfile/*.war', storageClass: 'STANDARD', uploadFromSlave: false, useServerSideEncryption: false]], pluginFailureResultConstraint: 'FAILURE', profileName: 'mybucket1forjenkins', userMetadata: []
